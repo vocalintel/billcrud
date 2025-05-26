@@ -1,0 +1,23 @@
+{%extends 'main.html'%}
+
+{%block registrationx %}
+{%block fasola %}
+<div class="collapse navbar-collapse">
+	<ul class="nav navbar-nav navbar-right">
+		<li><a href={% url 'billboard:billboards'%}>Home</a></li>
+	</ul>
+</div>
+{%endblock%}
+<div class="shopbas">
+	<h1 class="regis">Register here</h1>
+	<form method="POST">
+		{%csrf_token%}
+		{{form}}
+		<input type="submit" value='Register'/>
+		<div class="reglog">
+		Already have an account!
+		<a href={%url 'login'%}>Log in</a>
+		</div>
+	</form>
+</div>
+{%endblock%}

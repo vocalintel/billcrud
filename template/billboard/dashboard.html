@@ -1,0 +1,393 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Keesha Billboard</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">	
+	<link rel="stylesheet" href="{%static '/boards/css/dashboard.css' %}">
+	<link rel="stylesheet" href="{%static '/boards/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{%static '/boards/css/font-awesome.min.css' %}">
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
+</head>
+<body id="bod">
+	<div id="containera">
+		<div class="dashboard">
+			<div class="dashboard_down">
+				<div id="dash" class="dashboard_down_left">
+					<button href="" id="dashboard_keesha">
+						<img src="{%static '/boards/images/logoo.png' %}" class="lw"/>
+						<h3 class="kes">KEESHA Billboard</h3>
+					</button>
+					<button href="" id="dashboard_enable">
+						<i class="fa fa-globe circ" ></i>
+						<p>Get Started</p>
+					</button>
+					<button href="{{xy.username}}" id="dashboard_product">
+						<i class="fa fa-user circ"></i>
+						<p>Profile</p>
+					</button>
+					<button href="" id="dashboard_plan">
+						<i class="fa fa-info circ"></i>
+						<p>Plan</p>
+					</button>
+					<button href="" id="dashboard_account">
+						<i class="fa fa-cog circ"></i>
+						<p>Upgrade Account</p>
+					</button>
+				</div>
+				<div class="dashboard_down_right">
+					<button class="bt ic" id="hd">
+						<img src="{%static '/boards/images/dashicon.png' %}" style="width:100%;" />
+					</button>
+					<div class="sh">
+						<span>{{request.user.email}}</span>
+						<button id="la" class="fa fa-chevron-down embut"></button>
+					</div>
+					<div class="ad">
+					</div>
+					<div class="logi">
+						<a href="/billboard">
+							<i class="fa fa-home" id="hm"></i>
+							<button class="btn psw">
+								<a href="/billboard">Home</a>
+							</button>
+						</a>
+						<hr/>
+						<a href="/password_change">
+							<i class="fa fa-key" id="hm"></i>
+							<button class="btn psw">
+								<a href="/password_change">Change Password</a>
+							</button>
+						</a>
+						<hr/>
+						<a href="/password_reset">
+							<i class="fa fa-refresh" id="hm"></i>
+							<button class="btn psw">
+								<a href="/password_reset">Reset Password</a>
+							</button>
+						</a>
+						<hr/>
+						<a href="/logout">
+							<i class="fa fa-sign-out" id="hm"></i>
+							<button class="btn psw">
+								<a href="/logout">Log Out</a>
+							</button>
+						</a>
+					</div>
+					<h1 class="kb" style="text-align: center;">Welcome to Keesha Billboard</h1>
+					<p class="ak">Hi {{request.user.username}}, Your login request is successful.Here is your dashboard page</p>
+					<div id="dashboard_eleven">
+						<div  class="dec">
+							<img src="{%static '/boards/images/das.png' %}" style="opacity:0.8;width:45%;" />
+						</div>
+						<p>Submit compliance detail to activate your account</p>
+						<a href="/gateway">
+							<button class="btn btn-success">Account Setup</button>
+						</a>
+					</div>
+					<div id="dashboard_twelve">
+						<form id="taskaa-form">
+							<div class="fm">
+							{%if users %}
+								{%for xy in users%}
+								<h5 class="ft">Firstname:</h5><p class="nam">{{xy.first_name}}</p>
+								<h5 class="ft">Lastname: </h5><p class="nam">{{xy.last_name}}</p>
+								<h5 class="ft">Username: </h5><p class="nam">{{xy.username}}</p>
+								<h5 class="ft">Email: </h5><p class="nam">{{xy.email}}</p>
+								<a href="{{xy.username}}" id="updat"><button class="upfd btn btn-success">Update details </button></a>
+								{%endfor%}	
+							{%endif%}
+							</div>
+						</form>
+					</div>
+					<div id="dashboard_fiften" class="shopbas">
+						<form id="fif" method="POST" enctype="multipart/form-data">
+							{%csrf_token%}
+							<div>
+								<b>{{form.first_name.label}}<sup class="rad">*</sup><br/></b>
+								{{form.first_name}}<br/>
+							</div>
+							<div>
+								<b>{{form.last_name.label}}<sup class="rad">*</sup><br/></b>
+								{{form.last_name}}
+							</div>
+							<div>
+								<b>{{form.email.label}}<sup class="rad">*</sup><br/></b>
+								{{form.email}}
+							</div>
+							<div>
+								<b>{{form.username.label}}<sup class="rad">*</sup><br/></b>
+								{{form.username}}
+							</div>
+							<div>
+								<b>{{form.password1.label}}<sup class="rad">*</sup><br/></b>
+								{{form.password1}}
+							</div>
+							<div>
+								<b>{{form.password2.label}}<sup class="rad">*</sup><br/></b>
+								{{form.password2}}
+							</div>
+							<button id="tu" class="was btn btn-success">Submit </button>
+						</form>
+					</div>
+					<div id="dashboard_thirten">
+						<form id="teskaa-form">
+							<div style="margin-top:2vh;margin-left:3%;">
+							{%if plans %}
+								{%for xf in plans%}
+								<div class="col-md-12 col-lg-12" style="padding:0;">
+									<div class="col-md-6 col-lg-6">
+										<h5 class="ft">Product name:</h5>
+										<p class="nam">{{xf.name}}</p>
+										<h5 class="ft">Product Description:</h5>
+										<p class="nam">{{xf.desc}}</p>
+										<h5 class="ft">Advert Transition Duration:</h5>
+										<p class="nam">{{xf.time}}</p>
+										<h5 class="ft">Advert Transition:</h5>
+										<p class="nam">{{xf.plan}}</p>
+										<h5 class="ft">Type of Billboard:</h5>
+										<p class="nam">{{xf.options}}</p>
+										<h5 class="ft">Days to Display Advert</h5>
+										<div class="col-md-12 col-lg-12 daya" style="padding:0;">
+											<div class="col-md-6 col-lg-6" style="padding:0;">
+												<h5 class="ft">Sunday({{xf.Sunday}})</h5>
+												<h5 class="ft">Monday({{xf.Monday}})</h5>
+												<h5 class="ft">Tuesday({{xf.Tuesday}})</h5>
+												<h5 class="ft">Wednesday({{xf.Wednesday}})</h5>
+											</div>
+											<div class="col-md-6 col-lg-6" style="padding:0;">
+												<h5 class="ft">Thursday({{xf.Thursday}})</h5>
+												<h5 class="ft">Friday({{xf.Friday}})</h5>
+												<h5 class="ft">Saturday({{xf.Saturday}})</h5>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-6">
+										<h5 class="ft">Location to Display Advert:</h5>
+										<p class="nam">{{xf.location}}</p>
+										<h5 class="ft">Advert Image:</h5>
+										<div class="nam"><img src="../media/{{xf.image}}" style="width:50%;"/>{{xf.image}}</div>
+										<h5 class="ft">Start Date to Display Advert:</h5>
+										<p class="nam">{{xf.date}}</p>
+										<a href="{{xf.username}}" id="updet">
+											<button  class="btn btn-success">Update details </button>
+										</a>
+									</div>
+								</div>
+								{%endfor%}
+							{%endif%}
+							</div>
+						</form>
+					</div>
+					<div id="dashboard_sixten">
+						<form id="tanko" method="POST" enctype="multipart/form-data">		
+							{%csrf_token%}
+							<div class="ow  mi">
+								<b>{{forma.user.label}}<sup class="rad">*</sup><br/></b>
+								{{forma.user}}
+							</div>
+							<hr st/>
+							<div class="ow">
+								<b>{{forma.name.label}}<sup class="rad">*</sup><br/></b>
+								{{forma.name}}
+							</div>
+							<hr/>
+							<div class="ow">
+								<b>{{forma.desc.label}}<sup class="rad">*</sup><br/></b>
+								{{forma.desc}}
+							</div>
+							<hr/>
+							<div class="ons">
+								<b>{{forma.image.label}}<sup class="rad">*</sup><br/></b>
+								{{forma.image}}
+							</div>
+							<hr/>
+							<div class="mi ow">
+								<b>{{forma.plan.label}}<br/></b>
+								{{forma.plan}}
+								<span>Only required for digital billboard</span>
+							</div>
+							<hr/>
+							<div class="rela">
+								<b><p class="da">Days to display advert:<sup class="rad">*</sup>
+								</b>
+								<div class="daa">
+									<span class="db">{{forma.Sunday}}</span><span class="dbb">Sunday</span> 
+									<span class="dc">{{forma.Monday}}</span> <span class="dcc">Monday</span>
+									<span class="dd">{{forma.Tuesday}}</span> <span class="ddd">Tuesday</span>
+									<span class="de">{{forma.Wednesday}}</span> <span class="dee">Wednesday</span>
+									<span class="df">{{forma.Thursday}}</span> <span class="dff">Thursday</span>
+									<span class="dg">{{forma.Friday}}</span> <span class="dgg">Friday</span>
+									<span class="dh">{{forma.Saturday}}</span> <span class="dhh">Saturday</span>
+								</div>
+							</div>
+							<hr/>
+							<div class="col-lg-12 col-md-12 ow nja time">
+								<div class="col-lg-6 col-md-6 ons">
+									<b>{{forma.time.label}}<br/></b>
+									{{forma.time}}
+								</div>
+								<div class="col-lg-6 col-md-6 nx">
+									<b>{{forma.date.label}}<sup class="rad">*</sup><br/></b><p class="mna">
+									{{forma.date}}
+								</div>
+							</div>
+							<hr/>
+							<div class="col-lg-12 col-md-12 on">
+								<div class="col-lg-6 col-md-6 ons">
+									<b>{{forma.options.label}}<sup class="rad">*</sup><br/></b>
+									{{forma.options}}
+								</div>
+								<div class="col-lg-6 col-md-6 onb">
+									<b>{{forma.location.label}}<sup class="rad">*</sup><br/></b>
+									{{forma.location}}
+								</div>
+							</div>
+							<hr/>
+							<button id="tak" class="day btn btn-success">Submit </button>
+						</form>
+					</div>
+					<div id="dashboard_fourten">
+						<form id="tkaa-form">
+							<div class="aca">
+							{%if account %}
+								{%for xb in account%}
+								<h5 class="ft">Company name:</h5>
+								<p class="nam">{{xb.compname}}</p>
+								<h5 class="ft">Company email:</h5>
+								<p class="nam">{{xb.compemail}}</p>
+								<h5 class="ft">Company Phone number:</h5>
+								<p class="nam">{{xb.phone}}</p>
+								<h5 class="ft">Company Subscription Plan:</h5>
+								<p class="nam">{{xb.pricing}}</p>
+								<a href="{{xb.username}}">
+									<button id="updact" class="day btn btn-success">Update details </button>
+								</a>
+								{%endfor%}
+							{%endif%}
+						</div>
+						</form>
+					</div>
+					<div id="dashboard_seventen">
+						<form method="POST" id="aku" enctype="multipart/form-data">
+							{%csrf_token%}
+							<div class="ow mo">
+								<b>{{formp.user.label}}<sup class="rad">*</sup><br/></b>
+								{{formp.user}}
+							</div>
+							<div class="ow mo">
+								<b>{{formp.compname.label}}<sup class="rad">*</sup><br/></b>
+								{{formp.compname}}
+							</div>
+							<div class="ow mo">
+								<b>{{formp.phone.label}}<sup class="rad">*</sup><br/></b>
+								{{formp.phone}}
+							</div>
+							<div class="ow mo">
+								<b>{{formp.compemail.label}}<sup class="rad">*</sup><br/></b>
+								{{formp.compemail}}
+							</div>
+							<div class="ow mo">
+								<b>{{formp.pricing.label}}<sup class="rad">*</sup><br/></b>
+								{{formp.pricing}}
+							</div>
+							<button id="tack" class="day btn btn-success">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="{%static '/boards/js/jquery.js' %}"></script>
+	<script type="text/javascript" src="{%static '/boards/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{%static '/boards/js/smoothscroll.js' %}"></script>
+	<script type="text/javascript" src="{%static '/boards/js/isotope.js' %}"></script>
+	<script type="text/javascript" src="{%static '/boards/js/imagesloaded.min.js' %}"></script>
+	<script type="text/javascript" src="{%static '/boards/js/nivo-lightbox.min.js' %}"></script>
+	<script type="text/javascript" src="{%static '/boards/js/jquery.backstretch.min.js' %}"></script>
+	<script type="text/javascript" src="{%static '/boards/js/wow.min.js' %}"></script>
+	<script type="text/javascript" src="{%static '/boards/js/cussa.js' %}"></script>
+	<script type="text/javascript">
+		$(document).on('submit','#taskaa-form',function(e){
+			e.preventDefault();
+			
+			});
+	</script>
+	<script type="text/javascript">
+		$(document).on('submit','#aku',function(){
+			alert("Your details has been successfully updated");
+			
+			});
+	</script>
+	<script type="text/javascript">
+		$(document).on('submit','#tanko',function(){
+			alert("Your details has been successfully updated");
+			
+			});
+	</script>
+	<script type="text/javascript">
+		$(document).on('submit','#fif',function(){
+			alert("Your details has been successfully updated");
+			
+			});
+	</script>
+	<script type="text/javascript">
+		$(document).on('submit','#tkaa-form',function(e){
+			e.preventDefault();
+			
+			});
+	</script>
+	<script type="text/javascript">
+		$(document).on('submit','#teskaa-form',function(e){
+			e.preventDefault();
+			});
+	</script>
+	<script>
+		let y = document.getElementById("dash")
+		let t = document.getElementById("la")
+		let z = document.querySelector(".dashboard_down_right");
+		let a = document.querySelector(".bt");
+		let l = document.querySelector(".logi")
+		let h = document.getElementById("hd");
+		
+		function doHide(){
+		y.style.display="none",
+		z.style.width="100%",
+		h.style.outline="none"
+		}
+
+		function doShow(){
+		y.style.display="block",
+		z.style.width="80%",
+		a.style.outline="none"
+		}
+		
+		h.onclick = function (){
+		if(y.style.display !== "none"){
+			doHide()
+		}else{
+			doShow()
+			}
+		};
+		function doHidel(){
+		l.style.display="none"
+		}
+		function doShowl(){
+		l.style.display="block"
+		}
+		doHidel()
+		t.onclick = function(){
+		if(l.style.display !== "none"){
+			doHidel()
+		}else{
+			doShowl()
+			}
+		};
+	</script>
+</body>
+</html>
+

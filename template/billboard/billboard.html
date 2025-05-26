@@ -1,0 +1,794 @@
+{%extends 'main.html'%}
+{%load static %}
+{%block teni %}
+<div class="collapse navbar-collapse">
+	<ul class="nav navbar-nav navbar-right">
+		<li><a href="#home" id="hom" class="">Home</a></li>
+		<li><a href="#work">Work</a></li>
+		<li><a href="#about" class="">About</a></li>
+		<li><a href="#team" class="">Team</a></li>
+		<li><a href="#portfolio" class="">Portfolio</a></li>
+		<li><a href="#plan" class="">Pricing</a></li>
+		<li><a href="#contact" id="con" class="">Contact</a></li>
+		{%if users %}
+			{%for xy in users%}
+			<li><a onclick="doShowdash()" id="das">Dashboard</a></li>
+			{%endfor%}
+		{%else%}
+			<li><a onclick="showname()" id="das">Dashboard</a></li>
+		{%endif%}
+	</ul>
+</div>
+{%endblock%}
+{%block tade %}
+{%if dval  %}
+<script>alert("form was submitted")</script>
+{%else%}
+{%endif%}
+
+<!-- home section -->
+<div id="home">
+	<div class="containersa">
+		<img src="{%static '/boards/images/1.gif' %}" />
+		<div class="bottom-right">
+			<div class="col-md-12 col-sm-12">
+				<a href="#mymodallogin"  class="btn btn-success" onclick="doShowlog()">
+					Login
+				</a>
+			</div>
+			<div class="col-md-12 col-sm-12">
+				<a href="registration" class="btn btn-primary">Register</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="dashmodal shoplog" id="mymodaldash">
+	<section class="modaldash">
+		<div class="dasl">
+			<b><span>NOTICE !!!</span></b><button type="button" class="close" onclick="doHidedash()">&times;</button>
+		</div>
+		<p class="dasa">For individual to access their dashboard on Keesha Billboard<br/>Individual user needs to complete their account set up.Havent completed account setup. <a href="gateway">Set up Account</a></p>
+		{%if users %}
+			{%for xy in users%}
+				<a href="dashboard/{{xy.username}}"><button class="dasb btn btn-primary"onclick="doShowdash()" id="das">Go to Dashboard >></button></a>
+			{%endfor%}
+		{%endif%}
+	</section>
+</div>
+<div class="loginmodal shoplog" id="mymodallogin">
+	<section class="modallogin">
+		<button  class="close" onclick="doHidelog()">&times;</button>
+		<div class="logr">
+			<img src="{%static '/boards/images/logoo.png' %}" alt="logo" width="150px" margin-bottom="10vh"/>
+		</div>
+		<form method="post">
+			{%csrf_token%}
+			{{ forma.non_field_errors }}
+			<div class="fieldWrapper">
+				{{ forma.username.errors }}
+				{{ forma.username }}
+			</div>
+			<div class="fieldWrapper">
+				{{ forma.password.errors }}
+				{{ forma.password }}
+			</div>
+			<input type="submit" value='Login'/>
+			<div class="reglog">
+				Complete<a href="/gateway">ACCOUNT SETUP</a> before clicking on login button<br/>Don't have an account!&nbsp; <a href="/registration">Register</a>
+			</div>
+			<div>
+				<a href="/password_reset">Forgot your password?</a>
+			</div>
+		</form>	
+	</section>
+</div>							
+
+<!-- work section -->
+<section id="work">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
+					<div class="section-title">
+						<h5 class="wow bounceIn">Keesha Billboard</h5>
+						<h1 class="heading">WHO WE ARE</h1>
+						<hr class="omg"/>
+						<p>Click on the keesha logo located on the top to scroll up</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
+				<i class="icon-documents medium-icon"></i>
+				<h3>COMPANIES ACTIVITIES</h3>
+				<hr>
+				<p>Keesha billboard has gone through different activities. They include installation of billboards in Africa....<a onclick="doShowyear()">Read More</a></p>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.9s">
+				<i class="icon-gift medium-icon"></i>
+				<h3>AWARDS</h3>
+				<hr>
+				<p>The company has participated in different types of activities and has received several outstanding awards</p>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="1s">
+				<i class="icon-globe medium-icon"></i>
+				<h3>TECHNICAL AFFILIATION</h3>
+				<hr>
+				<p>Our technical Affiliation are Member of the Outdoor Advertising Association of America. Our technical affiliation members work together in team.</p>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="1s">
+				<i class="icon-compass medium-icon"></i>
+				<h3>OUR CLIENTS</h3>
+				<hr>
+				<p>Our clients are drawn from all part of the economy.They include fidelity bank, sterling bank, Gt bank....<a onclick="doShowcl()">Read More</a></p>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="1s">
+				<i class="icon-mobile medium-icon"></i>
+				<h3>TERMS OF BUSINESS</h3>
+				<hr>
+				<p>Our terms of Business include Operational and Finance. The general scope of the operations of an outdoor advertising company....<a onclick="doShowbus()">Read More</a></p>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="1s">
+				<i class="icon-browser medium-icon"></i>
+				<h3>JOBS/CAREER</h3>
+				<hr>
+				<p>Sorry, there is no vacancy</p>
+			</div>
+		</div>
+	</div>
+	<div class="yearmodal shoplog" id="mymodalyear">
+		<section class="modalyear">
+			<button type="button" class="close" onclick="doHideyear()">&times;</button>
+			<div class="cx">
+				<table>
+					<tr class="vena">
+						<th>Year</th>
+						<th>Activities</th>
+					</tr>
+					<tr class="one">
+						<td>2013</td>
+						<td>Developed strategically located 40 sheet, 16 sheet and Street Sign panels nationwide</td>
+					</tr>
+					<tr>
+						<td>2014</td>
+						<td>Introduce rooftops and highrise advertising using cmputer painted flexible faces</td>
+					</tr>
+					<tr class="two">
+						<td>2015</td>
+						<td>Introduced prisma vision and inflatable ballons or events marketing</td>
+					</tr>
+					<tr>
+						<td>2016</td>
+						<td>1st to design all-steel billboard panel.<br/>1st to introduce computer (advertising) flexi/vinyl.</br>1st to introduce inflatable replica of a product.</td>
+					</tr>
+					<tr class="three">
+						<td>2017</td>
+						<td>1st with site on Abuja International Airport Route route</td>
+					</tr>
+					<tr>
+						<td>2018-20</td>
+						<td>1st to introduce imposing and visibly effective Multi-pole spectacular board.</td>
+					</tr>
+					<tr class="four">
+						<td>2020</td>
+						<td>1st to introduce the two-sidesd Unipole Spectacular board</td>
+					</tr>
+					<tr>
+						<td>2021</td>
+						<td>1st to introduce the three sided unipole spectacular board.</td>
+					</tr>
+					<tr class="five">
+						<td>2022</td>
+						<td>1st to develop Backlit Spectacular Board.</td>
+					</tr>
+				</table>
+			</div>		
+		</section>
+	</div>
+	<div class="clmodal shoplog" id="mymodalcl">
+		<section class="modalcl">
+			<button type="button" class="close" onclick="doHidecl()">&times;</button>
+			<div class="cx">
+				<table>
+					<tr class="vena">
+						<th>NO</th>
+						<th>OUR CLIENTS</th>
+					</tr>
+					<tr class="one">
+						<td>1</td>
+						<td>Coca-Cola Nigerian Limited/Nigerian Bottling Company</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Guiness Nigeria Plc</td>
+					</tr>
+					<tr class="two">
+						<td>3</td>
+						<td>International Distilleries Ltd</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>Nigerian Breweries Plc</td>
+					</tr>
+					<tr class="three">
+						<td>5</td>
+						<td>Pepsi International/ 7ip Bottling Company</td>
+					</tr>
+					<tr>
+						<td>6</td>
+						<td>MTN</td>
+					</tr>
+					<tr class="four">
+						<td>7</td>
+						<td>Zain</td>
+					</tr>
+					<tr>
+						<td>8</td>
+						<td>Starcomms</td>
+					</tr>
+					<tr class="five">
+						<td>9</td>
+						<td>GlaxoSmithkline</td>
+					</tr>
+					<tr>
+						<td>10</td>
+						<td>HPZ</td>
+					</tr>
+					<tr class="one">
+						<td>11</td>
+						<td>Indomie Noodles</td>
+					</tr>
+					<tr>
+						<td>12</td>
+						<td>Nestle Nig Plc</td>
+					</tr>
+				</table>
+			</div>
+		</section>
+	</div>			
+	<div class="busmodal shoplog" id="mymodalbus">
+		<section class="modalbus">
+			<button type="button" class="close" onclick="doHidebus()">&times;</button>
+			<div class="terms cx">
+				<h2>OBJECTIVE</h2>
+				<p>The major objective of our outdoor advertising company is to select,erect and service billboards at various locations as agreed with the clients. The responsiblity of selecting ensures that the locations are strategic and viable for the audience being targeted. The placement of the billboard is a configuration of its size and the existing environment features. Usually, yhe visual attraction of the billboard in terms of their aesthetic values should greatly enhance the beauty of the urban scene.The erection of such boards normally will not pose immediate of future problems to the draibnage network no encroach on the walkway(s), public safety and transportation</p>
+				&nbsp;
+				<h2>MARKETING</h2>
+				<p>The client of an outdoor advertising industry could either be an advertising agency or a manufacturing company or marketing company as the case may be. The client rents a billboard from the outdoor advertising company for a specific period of time , usually one year. The rentals contract is formally renewed at expiration. Rental rates for conventional outdoor advertising billboards such as 40 sheet,10 sheet,bulletin boards, street directional signs and 4 sheet are usually determined and regulated by the Outdoor Advertising Association of Nigeria.(DAAN)<br/>Thermal rates for unique billboards designed and introduced by an individual company within the association are isuallly determined by the company that introduces such unique boards. e.g -Keesha Billboard introduced the 'Spectacles' and the rental rates are determined by Keesha Billboard only.</p>
+			</div>
+		</section>
+	</div>
+</section>
+
+<!-- about section -->
+<section id="about">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 text-center">
+				<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
+					<div class="section-title">
+						<h5 class="wow bounceIn">Keesha Billboard</h5>
+						<h1 class="heading">WHAT WE DO</h1>
+						<hr>
+						<p>Click on the keesha logo located on the top to scroll up</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<img src="{%static '/boards/images/5.jpeg' %}" class="img-responsive" alt="about img">
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<h3 class="bold boda">KEESHA BILLBOARDS</h3>
+				<h1 class="heading bold outdoor">Best Outdoor Advertising Company in Nigeria </h1>
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="active"><a href="#mobile" aria-controls="design" role="tab" data-toggle="tab">MISSION</a></li>
+					<li><a href="#mobile" aria-controls="mobile" role="tab" data-toggle="tab">DESIGN</a></li>
+					<li><a href="#social" aria-controls="social" role="tab" data-toggle="tab">BUSINESS</a></li>
+				</ul>
+				<!-- tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="design">
+						<p>Keesha Billboard mission is essentially a mode of marketing information whereby advertisers are able to relay marketing information to prospective customers by a way of display once they are outside the four walls of their homes.
+						<p>Outdoor Advertising involves the development and maintenance of strategically located display channels which provides optimal visibility to vehicular arnd human traffic</p>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="mobile">
+						<p>Keesha Billboard design is essentially a mode of marketing information whereby advertisers are able to relay marketing information to prospective customers by a way of display once they are outside the four walls of their homes.
+						<p>Outdoor Advertising involves the development and maintenance of strategically located display channels which provides optimal visibility to vehicular arnd human traffic</p>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="social">
+						<p>Keesha Billboard business is essentially a mode of marketing information whereby advertisers are able to relay marketing information to prospective customers by a way of display once they are outside the four walls of their homes.
+						<p>Outdoor Advertising involves the development and maintenance of strategically located display channels which provides optimal visibility to vehicular arnd human traffic</p>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- team section -->
+<section id="team">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
+					<div class="section-title">
+						<h5 class="wow bounceIn">Keesha Billboard</h5>
+						<h1 class="heading">OUR TEAM</h1>
+						<hr>
+						<p>Click on the keesha logo located on the top to scroll up</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="dav mt-5" >
+		<div class="owl-carousel owl-theme">
+			<div class="card">
+				<img src="{%static '/boards/images/upteam1-1.jpg' %}" class="card-img-top" alt="Snow" style="width:100%;">
+				<div class="carda">
+					<div class="bottom-left">
+						<div class="oya">
+							<button class="market"><a href="#mymodalceo" onclick="doShowceo()">CEO</a></button>
+							<p>Miss Cindy M.Sc <br/>Communication Engineering</p>
+							<button class="read"><a href="#mymodalceo" onclick="doShowceo()">Read More<span class="kuma">></span></a></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<img src="{%static '/boards/images/upteam3-1.jpg' %}" class="card-img-top" alt="Snow" style="width:100%;">
+				<div class="carda">
+					<div class="bottom-left">
+						<div class="oya">
+							<button class="market"><a href="#mymodalman" onclick="doShowman()">Manager</a></button>
+							<p>Miss Linda M.Sc <br/>Communication Engineering</p>
+							<button class="read"><a href="#mymodalman" onclick="doShowman()">Read More<span class="kuma">></span></a></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="card">
+				<img src="{%static '/boards/images/upteam1-1.jpg' %}" class="card-img-top" alt="Snow" style="width:100%;">
+				<div class="carda">
+					<div class="bottom-left">
+						<div class="oya">
+							<button class="market"><a href="#mymodalmar" onclick="doShowmar()">Marketer</a></button>
+							<p>Miss Mary M.Sc <br/>Communication Engineering</p>
+							<button class="read"><a href="#mymodalmar" onclick="doShowmar()">Read More<span class="kuma">></span></a></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<img src="{%static '/boards/images/upteam3-1.jpg' %}" class="card-img-top" alt="Snow" style="width:100%;">
+				<div class="carda">
+					<div class="bottom-left">
+						<div class="oya">
+							<button class="market"><a href="#mymodalcro" onclick="doShowcro()">CRO</a></button>
+							<p>Miss Kitty M.Sc <br/>Communication Engineering</p>
+							<button class="read"><a href="#mymodalcro" onclick="doShowcro()">Read More<span class="kuma">></span></a></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<img src="{%static '/boards/images/upteam5-1.jpg' %}" class="card-img-top" alt="Snow" style="width:100%;">
+				<div class="carda">
+					<div class="bottom-left">
+						<div class="oya">
+							<button class="market"><a href="#mymodalsec" onclick="doShowsec()">Secretary</a></button>
+							<p>Miss George M.Sc <br/>Communication Engineering</p>
+							<button class="read"><a href="#mymodalsec" onclick="doShowsec()">Read More<span class="kuma">></span></a></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->					
+	<div class="ceomodal shoplog" id="mymodalceo">
+		<section class="modalceo">
+			<button type="button" class="close" onclick="doHideceo()">&times;</button>
+			<img src="{%static '/boards/images/upteam1-1.jpg' %}" class="img-responsive" alt="team img" style="width:50%;">&nbsp;
+			<p>The CEO of keesha design is Cindy. She helps to facilitate our business and very reliable. Many client have been patronizing us. thanks to her, for helping us. She created many of our social media pages such as instagram, twitter, facebook, linkedin and makes sure she post us on the page every week, so we can get more customer patronizing us daily. She has been working for th company for over 6 years and have been very reliable.</p>
+		</section>
+	</div>
+	<div class="manmodal shoplog" id="mymodalman">
+		<section class="modalman">
+			<button type="button" class="close" onclick="doHideman()">&times;</button>
+			<img src="{%static '/boards/images/upteam3-1.jpg' %}" class="img-responsive" alt="team img" style="width:50%;">&nbsp;
+			<p>Our manager at keesha design is Linda.  She helps to facilitate our business and very reliable. Many client have been patronizing us. thanks to her, for helping us. She created many of our social media pages such as instagram, twitter, facebook, linkedin and makes sure she post us on the page every week, so we can get more customer patronizing us daily. She has been working for th company for over 6 years and have been very reliable.</p>
+		</section>
+	</div>
+	<div class="dirmodal shoplog" id="mymodaldir">
+		<section class="modaldir">
+			<button type="button" class="close" onclick="doHidedir()">&times;</button>
+				<img src="{%static '/boards/images/upteam5-1.jpg' %}" class="img-responsive" alt="team img" style="width:50%;">&nbsp;
+				<p>Our director at keesha design is Sandar. She helps to facilitate our business and very reliable. Many client have been patronizing us. thanks to her, for helping us. She created many of our social media pages such as instagram, twitter, facebook, linkedin and makes sure she post us on the page every week, so we can get more customer patronizing us daily. She has been working for th company for over 6 years and have been very reliable.</p>
+		</section>
+	</div>
+	<div class="marmodal shoplog" id="mymodalmar">
+		<section class="modalmar">
+			<button type="button" class="close" onclick="doHidemar()">&times;</button>
+			<img src="{%static '/boards/images/upteam1-1.jpg' %}" class="img-responsive" alt="team img" style="width:50%;">&nbsp;
+			<p>Our marketer at keesha design is Mary. She helps to facilitate our business and very reliable. Many client have been patronizing us. thanks to her, for helping us. She created many of our social media pages such as instagram, twitter, facebook, linkedin and makes sure she post us on the page every week, so we can get more customer patronizing us daily. She has been working for th company for over 6 years and have been very reliable.</p>
+		</section>
+	</div>
+	<div class="cromodal shoplog" id="mymodalcro">
+		<section class="modalcro">
+			<button type="button" class="close" onclick="doHidecro()">&times;</button>
+			<img src="{%static '/boards/images/upteam3-1.jpg' %}" class="img-responsive" alt="team img" style="width:50%;">&nbsp;
+			<p>Our CRO at keesha design is Kitty. She helps to facilitate our business and very reliable. Many client have been patronizing us. thanks to her, for helping us. She created many of our social media pages such as instagram, twitter, facebook, linkedin and makes sure she post us on the page every week, so we can get more customer patronizing us daily. She has been working for th company for over 6 years and have been very reliable.</p>
+		</section>
+	</div>
+	<div class="secmodal shoplog" id="mymodalsec">
+		<section class="modalsec">
+			<button type="button" class="close" onclick="doHidesec()">&times;</button>
+			<img src="{%static '/boards/images/upteam5-1.jpg' %}" class="img-responsive" alt="team img" style="width:50%;">&nbsp;
+			<p>Our secretary at keesha design is George. He helps to facilitate our budiness and very reliable. Many client have been patronizing us. thank to him, for helping us. He created most of our social media pages such as instagram, twitter, facebook, linkedin and makes sure he post us on the page every week, so we can get more customer patronizing us daily. He has been working for th company for over 6 years and have been very reliable.</p>
+		</section>
+	</div>
+</section>
+
+<!-- portfolio section -->
+<div id="portfolio">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
+					<div class="section-title">
+						<h5 class="wow bounceIn">Keesha Billboard</h5>
+						<h1 class="heading">OUR PORTFOLIO</h1>
+						<hr>
+						<p>Click on the keesha logo located on the top to scroll up</p>
+					</div>
+				</div>
+			</div>
+				<!-- ISO section -->
+				<div class="iso-section">
+					<ul class="filter-wrapper clearfix">
+                   		 <li><a href="#" data-filter="*" class="selected opc-main-bg">All</a></li>
+                   		 <li><a href="#" class="opc-main-bg" data-filter=".gantry">GANTRY</a></li>
+                   		 <li><a href="#" class="opc-main-bg" data-filter=".mega">MEGA SITE</a></li>
+                    	 <li><a href="#" class="opc-main-bg" data-filter=".rooftop">ROOF TOP</a></li>
+						 <li><a href="#" class="opc-main-bg" data-filter=".lightbox">LIGHTBOX</a></li>
+						 <li><a href="#" class="opc-main-bg" data-filter=".standalone">STANDALONE</a></li>
+                    	 <li><a href="#" class="opc-main-bg" data-filter=".unipole">UNIPOLE</a></li>
+                    	 <li><a href="#" class="opc-main-bg" data-filter=".wallldrape">WALLDRAPE</a></li>
+                    	 <li><a href="#" class="opc-main-bg" data-filter=".ultrawave">ULTRA WAVE</a></li> 
+               		</ul>
+               		<div class="iso-box-section wow fadeIn" data-wow-delay="0.9s">
+               			<div class="iso-box-wrapper col4-iso-box">
+               				<div class="iso-box gantry col-lg-3 col-md-3 col-sm-6">
+								<a href="{%static '/boards/images/gantry.jpeg' %}" data-lightbox-gallery="portfolio-gallery"><img src="{%static '/boards/images/gantry.jpeg' %}" alt="portfolio img"></a>
+               				</div>
+               				<div class="iso-box mega col-lg-3 col-md-3 col-sm-6">
+								<a href="{%static '/boards/images/mega.jpeg' %}" data-lightbox-gallery="portfolio-gallery"><img src="{%static '/boards/images/mega.jpeg' %}" alt="portfolio img"></a>
+               				</div>
+               				<div class="iso-box html rooftop col-lg-3 col-md-3 col-sm-6">
+								<a href="{%static '/boards/images/rooftop.jpeg' %}" data-lightbox-gallery="portfolio-gallery"><img src="{%static '/boards/images/rooftop.jpeg' %}" alt="portfolio img"></a>
+               				</div>
+               				<div class="iso-box lightbox col-lg-3 col-md-3 col-sm-6">
+								<a href="{%static '/boards/images/lightbox.jpeg' %}" data-lightbox-gallery="portfolio-gallery"><img src="{%static '/boards/images/lightbox.jpeg' %}" alt="portfolio img"></a>
+               				</div>
+               				<div class="iso-box standalone col-lg-3 col-md-3 col-sm-6">
+								<a href="{%static '/boards/images/standalone.jpeg' %}" data-lightbox-gallery="portfolio-gallery"><img src="{%static '/boards/images/standalone.jpeg' %}" alt="portfolio img"></a>
+               				</div>
+               				<div class="iso-box unipole col-lg-3 col-md-3 col-sm-6">
+								<a href="{%static '/boards/images/unipole.jpeg' %}" data-lightbox-gallery="portfolio-gallery"><img src="{%static '/boards/images/unipole.jpeg' %}" alt="portfolio img"></a>
+               				</div>
+							<div class="iso-box wallldrape col-lg-3 col-md-3 col-sm-6">
+								<a href="{%static '/boards/images/wallldrape.jpeg' %}" data-lightbox-gallery="portfolio-gallery"><img src="{%static '/boards/images/wallldrape.jpeg' %}" alt="portfolio img"></a>
+               				</div>
+               				<div class="iso-box ultrawave col-lg-3 col-md-3 col-sm-6">
+								<a href="{%static '/boards/images/ultrawave.jpeg' %}" data-lightbox-gallery="portfolio-gallery"><img src="{%static '/boards/images/ultrawave.jpeg' %}" alt="portfolio img"></a>
+               				</div>
+               			</div>
+               		</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+<!-- pricing section -->
+<section id="plan" class="parallax-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8 wow fadeInUp">
+				<div class="section-title">
+					<h5 class="wow bounceIn">Keesha Billboard</h5>
+					<h1 class="heading color-white">PRICING</h1>
+					<hr>
+					<p class="color-white">Click on the keesha logo located on the top to scroll up</p>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6 wow fadeInUp ba" data-wow-delay="0.3s">
+				<div class="plan">
+					<h4 class="plan-title heading">BASIC</h4>
+					<div class="plan-price">
+						<h1 class="plan-price-title">&#8358;100,000 / <small>Month</small></h1>
+					</div>
+					<ul class="plan-list">
+						<li>Display advert 1 day in a week</li>
+						<li>Advert displayed for 1 location</li>
+						<li>Advert display on Digital billboard</li>
+					</ul>
+					{%if request.user.username %}
+					<div class="plan-button">
+						<a href="gateway"><button class="btn btn-default">CHOOSE PLAN</button></a>
+					</div>
+					{%else%}
+					<div class="plan-button">
+						<button onclick="showname()" class="btn btn-default">CHOOSE PLAN</button>
+					</div>
+					{%endif%}
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6 wow fadeInUp ba" data-wow-delay="0.6s">
+				<div class="plan">
+					<h4 class="plan-title heading">BUSINESS</h4>
+					<div class="plan-price">
+						<h1 class="plan-price-title">&#8358;200,000 / <small>Month</small></h1>
+					</div>
+					<ul class="plan-list">
+						<li>Display advert 3 days in a week</li>
+						<li>Advert displayed for 2 location</li>
+						<li>Advert display on Digital billboard</li>
+					</ul>
+					{%if request.user.username %}
+					<div class="plan-button">
+						<a href="gateway"><button class="btn btn-default">CHOOSE PLAN</button></a>
+					</div>
+					{%else%}
+					<div class="plan-button">
+						<button onclick="showname()" class="btn btn-default">CHOOSE PLAN</button>
+					</div>
+					{%endif%}
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6 wow fadeInUp ba" data-wow-delay="0.9s">
+				<div class="plan">
+					<h4 class="plan-title heading">PROFESSIONAL</h4>
+					<div class="plan-price">
+						<h1 class="plan-price-title">&#8358;300,000 /<small>Month</small></h1>
+					</div>
+					<ul class="plan-list">
+						<li>dvert all days of the week</li>
+						<li>Advert displayed for 3 location</li>
+						<li>shows Digital & traditional billboard</li>
+					</ul>
+					{%if request.user.username %}
+					<div class="plan-button">
+						<a href="gateway"><button class="btn btn-default">CHOOSE PLAN</button></a>
+					</div>
+					{%else%}
+					<div class="plan-button">
+						<button onclick="showname()" class="btn btn-default">CHOOSE PLAN</button>
+					</div>
+					{%endif%}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- contact section -->
+<section id="contact">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 text-center">
+				<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
+					<div class="section-title">
+						<h5 class="wow bounceIn">Keesha Billboard</h5>
+						<h1 class="heading">CONTACT US</h1>
+						<hr>
+						<p>Click on the keesha logo located on the top to scroll up</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 col-sm-12 contact-info wow bounceIn" data-wow-delay="0.2s">
+				<div class="col-md-6 col-sm-12 contact-info wow bounceIn" data-wow-delay="0.2s">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.5430422902564!2d3.388361314308925!3d7.178699317192179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103a492c50019301%3A0xe3e7404253beda77!2sKeesha%20design!5e0!3m2!1sen!2sng!4v1653892772192!5m2!1sen!2sng"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+				</div>
+				<div class="col-md-6 col-sm-12 contact-info wow bounceIn" data-wow-delay="0.2s">
+					<form method="POST" enctype="multipart/form-data" id="task-form">
+						{%csrf_token%}
+						<div class="cont">
+							<span class="ma">{{form.name}}</span>
+							{{form.email}}
+						</div>
+						<div class="conts">
+							{{form.options}}
+						</div>
+						<div class="conts">
+							{{form.info}}
+						</div>
+						<div class="conta">
+							<input style="margin-right:260px;" type="submit" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- scrolltop section -->
+<a href="#top" class="go-top"><i class="fa fa-angle-up"></i></a>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).on('submit','#task-form',function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url: "{% url 'billboard:billboards'%}",
+            data:
+            {
+                csrfmiddlewaretoken:'{{ csrf_token }}',
+                name:$('#id_name').val(),
+                email:$('#id_email').val(),
+                options:$('#id_options').val(),
+                info:$('#id_info').val(),
+            },
+            success:function(){
+                  alert('Your request has been sent');
+                    }
+            })
+        });
+</script>
+
+<script>
+function showname(){
+	alert("You are not logged in")
+}
+</script>
+<script>
+let f = document.getElementById("mymodaldash")
+function doShowdash(){
+	f.style.visibility="visible"
+}
+function doHidedash(){
+	f.style.visibility="hidden"
+}
+doHidedash()
+</script>
+<script>
+let a = document.getElementById("hom")
+let b = document.getElementById("das")
+let c = document.getElementById("con")
+
+function doShowdas(){
+a.style.color="#fff";
+b.style.color="#00c6d7";
+b.style.color="#00c6d7";
+}
+function hidehom(){
+b.style.color="#fff";
+a.style.color="#00c6d7"
+}
+
+hidehom()
+</script>
+<script>
+
+	
+
+
+let l = document.getElementById("mymodallogin")
+let s = document.getElementById("mymodalmar")
+let h = document.getElementById("mymodalman")
+let k = document.getElementById("mymodaldir")
+let r = document.getElementById("mymodalceo")
+let my = document.getElementById("mymodalcro")
+let om = document.getElementById("mymodalsec")
+function doShowlog(){
+l.style.visibility="visible"
+}
+
+function doHidelog(){
+l.style.visibility="hidden"
+}
+
+function doShowmar(){
+s.style.visibility="visible"
+}
+
+function doHidemar(){
+s.style.visibility="hidden"
+}
+
+function doShowman(){
+h.style.visibility="visible"
+}
+
+function doHideman(){
+h.style.visibility="hidden"
+}
+
+function doShowdir(){
+k.style.visibility="visible"
+}
+
+function doHidedir(){
+k.style.visibility="hidden"
+}
+
+function doShowceo(){
+r.style.visibility="visible"
+}
+
+function doHideceo(){
+r.style.visibility="hidden"
+}
+function doShowcro(){
+my.style.visibility="visible"
+}
+
+function doHidecro(){
+my.style.visibility="hidden"
+}
+function doShowsec(){
+om.style.visibility="visible"
+}
+
+function doHidesec(){
+om.style.visibility="hidden"
+}
+
+doHidelog()
+doHidemar()
+doHideman()
+doHidedir()
+doHideceo()
+doHidecro()
+doHidesec()
+</script>
+<script>
+
+let y = document.getElementById("mymodalyear")
+function doShowyear(){
+y.style.visibility="visible"
+}
+
+function doHideyear(){
+y.style.visibility="hidden"
+}
+
+
+doHideyear()
+
+</script>
+
+<script>
+let m = document.getElementById("mymodalbus")
+
+function doShowbus(){
+m.style.visibility="visible"
+}
+
+function doHidebus(){
+m.style.visibility="hidden"
+}
+
+doHidebus()
+</script>
+<script>
+let q = document.getElementById("mymodalcl")
+
+function doShowcl(){
+q.style.visibility="visible"
+}
+
+function doHidecl(){
+q.style.visibility="hidden"
+}
+doHidecl()
+</script>
+<script>
+
+</script>
+{%endblock%}

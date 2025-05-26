@@ -1,0 +1,22 @@
+{%extends 'main.html'%}
+{%load static %}
+{%block loginx %}
+<div class="shoplag">		
+	<form method="POST">
+		<div class="logr">
+				<img src="{%static '/boards/images/logoo.png' %}" alt="logo" width="150px" margin-bottom="10vh"/>
+		</div>
+		{%csrf_token%}
+		<span class="logus">{{form.username}}</span>
+		{{form.password}}
+		<input type="submit" value='Login'/>
+		<div class="reglog">
+		Don't have an account!&nbsp; 
+		<a href="registration">Register</a>
+		</div>
+		<div>
+			<a href="/password_reset">Forgot your password?</a>
+		</div>
+	</form>
+</div>
+{%endblock%}

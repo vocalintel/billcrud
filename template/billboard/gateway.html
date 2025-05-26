@@ -1,0 +1,315 @@
+{%extends 'main.html'%}
+{%load static %}
+{%block fasola %}
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href={% url 'billboard:billboards'%}>Home</a></li>
+				{%if users %}
+					{%for xy in users%}
+						<li><a href="dashboard/{{xy.username}}" onclick="doShowdas()" id="das">Dashboard</a></li>
+					{%endfor%}
+					{%else%}
+					<li><a onclick="showname()" onclick="doShowdas()" id="das">Dashboard</a></li>
+				{%endif%}
+			</ul>
+		</div>
+{%endblock%}
+{%block gateway %}
+<div class="containeras">
+	<div id="inform">
+		<p>Hi {{request.user.username}}, Welcome to Keesha Billboards. It's gonna be easy to grow your business using our nice interconnected billboards</p>
+		<p>Kindly complete your the four step below to set up your account</p></div>
+		{% include 'messages.html' %}
+		<div class="gateway">
+			<div class="gateway_top">
+				<p>Complete the account setup and advertise your product</p>
+			</div>
+			<div class="gateway_down">
+				<div class="gateway_down_left">
+					<button href="" id="enable"><div class="circ">1</div>Account Setup</button>
+					<button href="" id="account"><div class="circ">2</div>Enable payment</button>
+					<button href="" id="product"><div class="circ">3</div>Company Name</button>
+					<button href="" id="plans"><div class="circ">4</div>Add Plan</button>
+				</div>
+				<div class="gateway_down_right">
+					<div id="eleven">
+						<p>Make account using our account gateway</p> 
+						<p>To collect live payment we have integrated paystack into our application</p>
+						<button  href="#mymodalpricing" class="btn btn-primary" onclick="doShowpr()">Upgrade Account >>></button>
+					</div>
+					<div id="fourten">
+						<p>Make payment using our payment gateway</p> 
+						<p>To collect live payment we have integrated paystack into our application</p>
+						<button  href="#mymodalenable" class="btn btn-primary" onclick="doShowenab()">Enable payment >>></button>
+					</div>
+					<div id="twelve">
+						<p>Make product using our product gateway</p> 
+						<p>To collect live payment we have integrated paystack into our application</p>
+						<button  href="#mymodalproduct" class="btn btn-primary" onclick="doShow()">Company Name >>></button>
+					</div>
+					<div id="thirten">
+						<p>Make plan using our plan gateway</p> 
+						<p>To collect live payment we have integrated paystack into our application</p>
+						<button href="#mymodalplan" class="btn btn-primary" onclick="doShowp()" >Add Plan >>></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="pricingmodal buy buypri"    id="mymodalpricing">
+		<section class="modalpricing">
+			<form method="POST" enctype="multipart/form-data">
+				<button type="button" class="close" onclick="doHidepr()">&times;</button>
+				{%csrf_token%}
+				<b><div class="product">Set up your account</div></b>
+				<div class="ow">
+					{{formp.user}}
+				</div>
+				<hr/>
+				<div class="ow">
+					<b>
+						{{formp.compname.label}}<sup class="rad">*</sup><br/>
+					</b>
+					{{formp.compname}}
+					<span>Add your certified business name</span>
+				</div>
+				<hr/>
+				<div class="ow">
+					<b>
+						{{formp.phone.label}}<sup class="rad">*</sup><br/>
+					</b>
+					{{formp.phone}}
+					<span>Add your certified business phone number</span>
+				</div>
+				<hr/>
+				<div class="ow">
+					<b>
+						{{formp.compemail.label}}<sup class="rad">*</sup><br/>
+					</b>
+					{{formp.compemail}}
+					<span>Add your certified business email</span>
+				</div>
+				<hr/>
+				<div class="ow">
+					<b>
+						{{formp.pricing.label}}<sup class="rad">*</sup><br/>
+					</b>
+					{{formp.pricing}}
+					<span>Select your desired billings</span>
+				</div>
+				<hr/>
+				<input class="btn btn-primary" type="submit" value="Continue->"/>
+			</form>
+		</section>
+	</div>
+	<div class="productmodal buy buycomp"    id="mymodalproduct">
+		<section class="modalproduct">
+			<form method="POST" enctype="multipart/form-data">
+				<button type="button" class="close" onclick="doHide()">&times;</button>
+				{%csrf_token%}
+				<b>
+					<div class="product">Add Company</div>
+				</b>
+				<div class="ow">
+					{{form.user}}
+				</div>
+				<hr/>
+				<div class="ow">
+					<b>
+						{{form.itemname.label}}<sup class="rad">*</sup><br/>
+					</b>
+					{{form.itemname}}
+				</div>
+				<hr/>
+				<input class="btn-default" onclick="doHide()" type="submit" value="Cancel"/>
+				<input class="btn-primary"  type="submit" value="Submit"/>
+			</form>
+		</section>
+	</div>
+	<div class="planmodal buyp"    id="mymodalplan">
+		<section class="modalplan">
+			<form method="POST" enctype="multipart/form-data">
+			<button type="button" class="close" onclick="doHidep()">&times;</button>
+			{%csrf_token%}
+				<b>
+					<div class="product">Add Plan</div>
+				</b>
+				<div class="ow">
+					{{forma.user}}
+				</div>
+				<hr />
+				<div class="ow">
+					<b>
+						{{forma.name.label}}<sup class="rad">*</sup><br/>
+					</b>
+					{{forma.name}}
+				</div>
+				<hr/>
+				<div class="ow">
+					<b>
+						{{forma.desc.label}}<sup class="rad">*</sup><br/>
+					</b>
+					{{forma.desc}}
+				</div>
+				<hr/>
+				<div class="ons">
+					<b>
+						{{forma.image.label}}<sup style="color:red;">*</sup><br/>
+					</b>
+					{{forma.image}}
+				</div>
+				<hr/>
+				<div class="mi ow">
+					<b>
+						{{forma.plan.label}}<br/>
+					</b>
+					{{forma.plan}}
+					<span>Only required for digital billboard</span>
+				</div>
+				<hr/>
+				<b>
+					<p style="ga">Days to display advert:<sup class="rad">*</sup>
+				</b>
+				<div class="gaa">
+					<span class="gb">{{forma.Sunday}}</span>
+					<span class="gbb">Sunday</span> 
+					<span class="gc">{{forma.Monday}}</span>
+					<span class="gcc">Monday</span><br/>
+					<span class="gd">{{forma.Tuesday}}</span>
+					<span class="gdd">Tuesday</span>
+					<span class="ge">{{forma.Tuesday}}</span>
+					<span class="gee">Wednesday</span><br/>
+					<span class="gf">{{forma.Tuesday}}</span>
+					<span class="gff">Thursday</span>
+					<span class="gh">{{forma.Tuesday}}</span>
+					<span class="ghh">Friday</span><br/>
+					<span class="gi">{{forma.Tuesday}}</span>
+					<span class="gii">Saturday</span>
+				</div>
+				<hr/>
+				<div class="col-lg-12 col-md-12 ow nja time">
+					<div class="col-lg-6 col-md-6 nj ons">
+						<b>
+							{{forma.time.label}}<br/>
+						</b>
+						{{forma.time}}
+					</div>
+					<div class="col-lg-6 col-md-6 nx">
+						<b>
+							{{forma.date.label}}<sup class="rad">*</sup><br/>
+						</b>
+						<p class="cola">{{forma.date}}</p>
+					</div>
+				</div>
+				<hr/>
+				<div class="col-lg-12 col-md-12 ona">
+					<div class="col-lg-6 col-md-6 ons">
+						<b>
+							{{forma.options.label}}<sup class="rad">*</sup><br/>
+						</b>
+						{{forma.options}}
+					</div>
+					<div class="col-lg-6 col-md-6 onb">
+						<b>
+							{{forma.location.label}}<sup class="rad">*</sup><br/>
+						</b>
+						{{forma.location}}
+					</div>
+				</div>
+				<hr/>
+				<div class="impo" class="sub">
+					<input class="btn-default" type="submit" onclick="doHidep()" value="Cancel"/>
+					<input class="btn-primary" type="submit" value="Submit"/>
+				</div>
+			</form>
+		</section>
+	</div>
+	<div class="enablemodal"    id="mymodalenable">
+		<section class="modalenable">
+			<button type="button" class="close" onclick="doHidenab()">&times;</button>
+			<form id="paymentForm"></form>
+			<div class="ena">
+				<h4>Email: {{user.email}}</h4>
+				<h4>Amount: {{pricing.value}}</h4>
+				<button type="submit" class="btn btn-primary" onclick="payWithPaystack()"> Make Payment </button>
+			</div>
+		</section>
+	</div>
+<script>
+	const paymentForm = document.getElementById('paymentForm');
+	paymentForm.addEventListener("submit", payWithPaystack, false);
+	function payWithPaystack(){
+		var handler = PaystackPop.setup({
+		key: 'pk_test_e004f7647c422d25ec9b5bafc5a84f1887259f9d',
+		email: '{{user.email}}',
+		amount: {{pricing.value}} * 100,
+		ref: ''+Math.floor((Math.random() * 1000000000) + 1), 
+		metadata: {
+			custom_fields: [
+				{
+					display_name: "Mobile Number",
+					variable_name: "mobile_number",
+					value: "+2348012345678"
+				}
+			]
+		},
+		callback: function(response){
+			window.location = "{%url 'billboard:gateway' %}";
+			alert('success. transaction ref is ' + response.reference + ' Proceed to step 3');
+		},
+		onClose: function(){
+			alert('window closed');
+		 }
+		});
+		handler.openIframe();
+	}
+</script>
+<script>
+
+let x = document.getElementById("box")
+let y = document.getElementById("mymodalproduct")
+let z = document.getElementById("mymodalplan")
+let w = document.getElementById("mymodalpricing")
+let s = document.getElementById("mymodalenable")
+
+function doHide(){
+y.style.visibility="hidden"
+}
+
+function doHidenab(){
+s.style.visibility="hidden"
+}
+
+function doHidepr(){
+w.style.visibility="hidden"
+}
+
+function doHidep(){
+z.style.visibility="hidden"
+}
+
+function doShow(){
+y.style.visibility="visible"
+}
+
+function doShowpr(){
+w.style.visibility="visible"
+}
+
+function doShowenab(){
+s.style.visibility="visible"
+}
+
+function doShowp(){
+z.style.visibility="visible"
+}
+
+doHide()
+doHidep()
+doHidepr()
+doHidenab()
+
+</script>
+{%endblock%}
