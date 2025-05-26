@@ -7,10 +7,23 @@ For more information on this file, see
 https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/
 """
 
-import os
+# import os
 
+# from django.core.wsgi import get_wsgi_application
+
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'xboards.settings')
+
+# application = get_wsgi_application()
+
+import os
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'xboards.settings')
 
-application = get_wsgi_application()
+try:
+    application = get_wsgi_application()
+except Exception as e:
+    import sys
+    print(f"WSGI application failed to load: {e}", file=sys.stderr)
+    raise
+
